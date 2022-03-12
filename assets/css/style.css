@@ -114,12 +114,17 @@ h1, h2, h3, h4, h5, h6 {
   background: #111111;
   color: #fff;
 }
+.pillars{
+background:#008f64;
+
+}
 @media (max-width: 992px) {
   .get-started-btn {
     margin: 0 15px 0 0;
     padding: 6px 18px;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -315,7 +320,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.514);
+  background: rgba(0, 0, 0, 0.61);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -477,6 +482,7 @@ section {
 .clients .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #198754;
 }
+
 .clients .swiper-slide img {
   opacity: 0.5;
   transition: 0.3s;
@@ -880,14 +886,16 @@ section {
   box-sizing: content-box;
   padding: 30px;
   margin: 30px 15px;
-  min-height: 200px;
+  min-height: 300px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.08);
   position: relative;
-  background: #fff;
+  background: rgb(255, 255, 255);
   border-radius: 15px;
+  /* width:90%; */
+
 }
 .testimonials .testimonial-item .testimonial-img {
-  width: 90px;
+  width: 200px;
   border-radius: 10px;
   border: 6px solid #fff;
   float: left;
