@@ -59,7 +59,7 @@ dataTest.map((d) => {
   };
   displayStudents();
 
-  let allStoryData = [1, 2, 3, 4, 5, 6];
+
   const displayStory = async() => {
     const response = await fetch(
       "https://shecancodeapplication-api.herokuapp.com/students",
@@ -73,19 +73,17 @@ dataTest.map((d) => {
     );
 const addd =await response.json();
 
-console.log(addd)
-
-  addd.map((d) => {
+  storiesData.map((d) => {
       allStoryDiv.innerHTML += ` <div class="swiper-slide">
   <div class="testimonial-wrap">
     <div class="testimonial-item">
-      <img src="assets/img/team/story2.png" class="testimonial-img" alt="">
+      <img src=${d.picture} class="testimonial-img" alt="">
       <!-- <h3>Ishime Billiii </h3> -->
       <!-- <h4>Designer</h4> -->
       <p>
         <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-        VMVP a father to vulnerable fatherless kids ,   over 10 widow families have received goats as the right way to enable teens and widow mothers to become full responsibility to provide the need of the children. 
-         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+      ${d.story}
+        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
       </p>
     </div>
   </div>
@@ -100,11 +98,9 @@ console.log(addd)
 
 
 // const teamData =require("../data/team.json")
-  const displayTeamMates = () => {
-    teamsData.map((d) => {
+  const displayTeamMates = async() => {
+    teamsData?.map((d) => {
       allTeamMatesDiv.innerHTML += `
-
-      
       <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
       <div class="member" data-aos="fade-up" data-aos-delay="100" style="display:flex">
         <div class="" style="width: 45%; background:red">
