@@ -1,292 +1,423 @@
 /**
-* Template Name: Presento - v3.7.0
-* Template URL: https://bootstrapmade.com/presento-bootstrap-corporate-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
+ * Template Name: Presento - v3.7.0
+ * Template URL: https://bootstrapmade.com/presento-bootstrap-corporate-template/
+ * Author: BootstrapMade.com
+ * License: https://bootstrapmade.com/license/
+ */
+// const select = selectors => {
+//   return document.querySelector(selectors);
+// };
+(function () {
   "use strict";
-
   /**
    * Easy selector helper function
    */
   const select = (el, all = false) => {
-    el = el.trim()
+    el = el.trim();
     if (all) {
-      return [...document.querySelectorAll(el)]
+      return [...document.querySelectorAll(el)];
     } else {
-      return document.querySelector(el)
+      return document.querySelector(el);
     }
-  }
+  };
 
+  /**
+   * Function to load students
+   */
+  //selector
+
+  let allStoryDiv = select("#story-div");
+  let allStudents = select("#studentsDisplayContainer");
+  let allTeamMatesDiv = select("#teamsDisplayContainer");
+
+  const dataTest = [
+    { name: "Eric Turatsinze", age: 14 },
+    { name: "Eric Turatsinze", age: 14 },
+    { name: "Fabrice Turatsinze", age: 14 },
+    { name: "Eric John", age: 14 },
+  ];
+
+  const displayStudents =async () => {
+    // console.log("@@@@@@@@@@",teamsData)
+dataTest.map((d) => {
+      allStudents.innerHTML += `
+  <div class="col-lg-3 col-md-6 portfolio-item filter-app">
+    <div class="portfolio-wrap">
+      <img src="assets/img/custom/poverty.jpeg" class="img-fluid" alt="">
+     <a href="sponsor.html" > 
+       <div class="portfolio-info">
+        <h4  >${d.name}</h4>
+        <p>12 Years Old</p>
+        <div class="portfolio-links">
+          <!-- <a href="assets/img/custom/poverty.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="fa-solid fa-eye"></i></a> -->
+          <a href="sponsor.html" title="More Details" style="font-size: 15px;"> Read more... <i class="bx bx-link"></i></a>
+        </div>
+      </div></a>
+    </div>
+  </div>`;
+    });
+  };
+  displayStudents();
+
+  let allStoryData = [1, 2, 3, 4, 5, 6];
+  const displayStory = async() => {
+    const response = await fetch(
+      "https://shecancodeapplication-api.herokuapp.com/students",
+      {
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+const addd =await response.json();
+
+console.log(addd)
+
+  addd.map((d) => {
+      allStoryDiv.innerHTML += ` <div class="swiper-slide">
+  <div class="testimonial-wrap">
+    <div class="testimonial-item">
+      <img src="assets/img/team/story2.png" class="testimonial-img" alt="">
+      <!-- <h3>Ishime Billiii </h3> -->
+      <!-- <h4>Designer</h4> -->
+      <p>
+        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+        VMVP a father to vulnerable fatherless kids ,   over 10 widow families have received goats as the right way to enable teens and widow mothers to become full responsibility to provide the need of the children. 
+         <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+      </p>
+    </div>
+  </div>
+</div>`;
+    });
+
+ 
+    // const ddata = require('../data/team.json')
+// console.log("@@2@@:",ddata)
+  }
+  displayStory();
+
+
+// const teamData =require("../data/team.json")
+  const displayTeamMates = () => {
+    teamsData.map((d) => {
+      allTeamMatesDiv.innerHTML += `
+
+      
+      <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+      <div class="member" data-aos="fade-up" data-aos-delay="100" style="display:flex">
+        <div class="" style="width: 45%; background:red">
+          <img src=${d?.Picture} class="img-fluid" alt="" style="width: 100%;">
+          <div class="social">
+            <h1></h1>
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="member-info" style="width:50%">
+          <h4>${d?.Names}</h4>
+          <span style="color:black">${d?.Title}</span>
+          <span>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            ${d?.Description}
+          <i class="bx bxs-quote-alt-right quote-icon-right"></i></span>
+        </div>
+      </div>
+    </div>
+      `;
+    });
+  };
+
+  displayTeamMates();
   /**
    * Easy event listener function
    */
   const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
+    let selectEl = select(el, all);
     if (selectEl) {
       if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
+        selectEl.forEach((e) => e.addEventListener(type, listener));
       } else {
-        selectEl.addEventListener(type, listener)
+        selectEl.addEventListener(type, listener);
       }
     }
-  }
+  };
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
+    el.addEventListener("scroll", listener);
+  };
 
   /**
    * Navbar links active state on scroll
    */
-  let navbarlinks = select('#navbar .scrollto', true)
+  let navbarlinks = select("#navbar .scrollto", true);
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
-    navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
+    let position = window.scrollY + 200;
+    navbarlinks.forEach((navbarlink) => {
+      if (!navbarlink.hash) return;
+      let section = select(navbarlink.hash);
+      if (!section) return;
+      if (
+        position >= section.offsetTop &&
+        position <= section.offsetTop + section.offsetHeight
+      ) {
+        navbarlink.classList.add("active");
       } else {
-        navbarlink.classList.remove('active')
+        navbarlink.classList.remove("active");
       }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
+    });
+  };
+  window.addEventListener("load", navbarlinksActive);
+  onscroll(document, navbarlinksActive);
 
   /**
    * Scrolls to an element with header offset
    */
   const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
+    let header = select("#header");
+    let offset = header.offsetHeight;
 
-    if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
+    if (!header.classList.contains("header-scrolled")) {
+      offset -= 16;
     }
 
-    let elementPos = select(el).offsetTop
+    let elementPos = select(el).offsetTop;
     window.scrollTo({
       top: elementPos - offset,
-      behavior: 'smooth'
-    })
-  }
+      behavior: "smooth",
+    });
+  };
 
   /**
    * Toggle .header-scrolled class to #header when page is scrolled
    */
-  let selectHeader = select('#header')
+  let selectHeader = select("#header");
   if (selectHeader) {
     const headerScrolled = () => {
       if (window.scrollY > 100) {
-        selectHeader.classList.add('header-scrolled')
+        selectHeader.classList.add("header-scrolled");
       } else {
-        selectHeader.classList.remove('header-scrolled')
+        selectHeader.classList.remove("header-scrolled");
       }
-    }
-    window.addEventListener('load', headerScrolled)
-    onscroll(document, headerScrolled)
+    };
+    window.addEventListener("load", headerScrolled);
+    onscroll(document, headerScrolled);
   }
 
   /**
    * Back to top button
    */
-  let backtotop = select('.back-to-top')
+  let backtotop = select(".back-to-top");
   if (backtotop) {
     const toggleBacktotop = () => {
       if (window.scrollY > 100) {
-        backtotop.classList.add('active')
+        backtotop.classList.add("active");
       } else {
-        backtotop.classList.remove('active')
+        backtotop.classList.remove("active");
       }
-    }
-    window.addEventListener('load', toggleBacktotop)
-    onscroll(document, toggleBacktotop)
+    };
+    window.addEventListener("load", toggleBacktotop);
+    onscroll(document, toggleBacktotop);
   }
 
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
+  on("click", ".mobile-nav-toggle", function (e) {
+    select("#navbar").classList.toggle("navbar-mobile");
+    this.classList.toggle("bi-list");
+    this.classList.toggle("bi-x");
+  });
 
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
-    }
-  }, true)
+  on(
+    "click",
+    ".navbar .dropdown > a",
+    function (e) {
+      if (select("#navbar").classList.contains("navbar-mobile")) {
+        e.preventDefault();
+        this.nextElementSibling.classList.toggle("dropdown-active");
+      }
+    },
+    true
+  );
 
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
-    if (select(this.hash)) {
-      e.preventDefault()
+  on(
+    "click",
+    ".scrollto",
+    function (e) {
+      if (select(this.hash)) {
+        e.preventDefault();
 
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+        let navbar = select("#navbar");
+        if (navbar.classList.contains("navbar-mobile")) {
+          navbar.classList.remove("navbar-mobile");
+          let navbarToggle = select(".mobile-nav-toggle");
+          navbarToggle.classList.toggle("bi-list");
+          navbarToggle.classList.toggle("bi-x");
+        }
+        scrollto(this.hash);
       }
-      scrollto(this.hash)
-    }
-  }, true)
+    },
+    true
+  );
 
   /**
    * Scroll with ofset on page load with hash links in the url
    */
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
-        scrollto(window.location.hash)
+        scrollto(window.location.hash);
       }
     }
   });
   /**
    * Clients Slider
    */
-  new Swiper('.clients-slider', {
+  new Swiper(".clients-slider", {
     speed: 400,
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
-    slidesPerView: 'auto',
+    slidesPerView: "auto",
     pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
+      el: ".swiper-pagination",
+      type: "bullets",
+      clickable: true,
     },
     breakpoints: {
       320: {
         slidesPerView: 2,
-        spaceBetween: 40
+        spaceBetween: 40,
       },
       480: {
         slidesPerView: 3,
-        spaceBetween: 60
+        spaceBetween: 60,
       },
       640: {
         slidesPerView: 4,
-        spaceBetween: 80
+        spaceBetween: 80,
       },
       992: {
         slidesPerView: 6,
-        spaceBetween: 120
-      }
-    }
+        spaceBetween: 120,
+      },
+    },
   });
 
   /**
    * Porfolio isotope and filter
    */
-  window.addEventListener('load', () => {
-    let portfolioContainer = select('.portfolio-container');
+  window.addEventListener("load", () => {
+    let portfolioContainer = select(".portfolio-container");
     if (portfolioContainer) {
       let portfolioIsotope = new Isotope(portfolioContainer, {
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows'
+        itemSelector: ".portfolio-item",
+        layoutMode: "fitRows",
       });
 
-      let portfolioFilters = select('#portfolio-flters li', true);
+      let portfolioFilters = select("#portfolio-flters li", true);
 
-      on('click', '#portfolio-flters li', function(e) {
-        e.preventDefault();
-        portfolioFilters.forEach(function(el) {
-          el.classList.remove('filter-active');
-        });
-        this.classList.add('filter-active');
+      on(
+        "click",
+        "#portfolio-flters li",
+        function (e) {
+          e.preventDefault();
+          portfolioFilters.forEach(function (el) {
+            el.classList.remove("filter-active");
+          });
+          this.classList.add("filter-active");
 
-        portfolioIsotope.arrange({
-          filter: this.getAttribute('data-filter')
-        });
-        portfolioIsotope.on('arrangeComplete', function() {
-          AOS.refresh()
-        });
-      }, true);
+          portfolioIsotope.arrange({
+            filter: this.getAttribute("data-filter"),
+          });
+          portfolioIsotope.on("arrangeComplete", function () {
+            AOS.refresh();
+          });
+        },
+        true
+      );
     }
-
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
-    selector: '.portfolio-lightbox'
+    selector: ".portfolio-lightbox",
   });
 
   /**
    * Portfolio details slider
    */
-  new Swiper('.portfolio-details-slider', {
+  new Swiper(".portfolio-details-slider", {
     speed: 400,
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
     pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
-    }
+      el: ".swiper-pagination",
+      type: "bullets",
+      clickable: true,
+    },
   });
 
   /**
    * Testimonials slider
    */
-  new Swiper('.testimonials-slider', {
+  new Swiper(".testimonials-slider", {
     speed: 600,
     loop: true,
     autoplay: {
       delay: 5000,
-      disableOnInteraction: false
+      disableOnInteraction: false,
     },
-    slidesPerView: 'auto',
+    slidesPerView: "auto",
     pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true
+      el: ".swiper-pagination",
+      type: "bullets",
+      clickable: true,
     },
     breakpoints: {
       320: {
         slidesPerView: 1,
-        spaceBetween: 20
+        spaceBetween: 20,
       },
 
       1200: {
         slidesPerView: 3,
-        spaceBetween: 20
-      }
-    }
+        spaceBetween: 20,
+      },
+    },
   });
 
   /**
    * Animation on scroll
    */
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     AOS.init({
       duration: 1000,
-      easing: 'ease-in-out',
+      easing: "ease-in-out",
       once: true,
-      mirror: false
-    })
+      mirror: false,
+    });
   });
+})();
 
-})()
+// console.log(teamsData);
