@@ -26,9 +26,22 @@
    */
   //selector
 
+
+  const viewData = (event) => {
+    const data = event.target.dataset.userName;
+    console.log(data)
+    console.log("GGGGGGGGGGGGGGG",)
+  }
+
   let allStoryDiv = select("#story-div");
   let allStudents = select("#studentsDisplayContainer");
   let allTeamMatesDiv = select("#teamsDisplayContainer");
+  let allBoardMembersDiv = select("#boardDisplayContainer");
+  let singleStudentDiv = select("#singleStudentView");
+
+  
+
+  let currentViewStudentData=studentsData[0]
 
   const dataTest = [
     { name: "Eric Turatsinze", age: 14 },
@@ -36,31 +49,184 @@
     { name: "Fabrice Turatsinze", age: 14 },
     { name: "Eric John", age: 14 },
   ];
-
-  const displayStudents =async () => {
+const setStudent =(student)=>{
+  console.log("@@@@");
+  currentViewStudentData=student
+}
+  const displayStudents = async () => {
     // console.log("@@@@@@@@@@",teamsData)
-dataTest.map((d) => {
-      allStudents.innerHTML += `
+    studentsData.map((d,i) => {
+      if (d.isAvailable) {
+        allStudents.innerHTML += `
   <div class="col-lg-3 col-md-6 portfolio-item filter-app">
-    <div class="portfolio-wrap">
-      <img src="assets/img/custom/poverty.jpeg" class="img-fluid" alt="">
-     <a href="sponsor.html" > 
-       <div class="portfolio-info">
-        <h4  >${d.name}</h4>
-        <p>12 Years Old</p>
-        <div class="portfolio-links">
+    <div class="portfolio-wrap" style="height:400px" id="getOneStudent">
+      <img src=${d.Picture} class="img-fluid" alt="">
+     <a href="#" > 
+       <div class="portfolio-info" id="student-view" data-user-name=${JSON.stringify(d.Picture)} >
+        <h4  >${d.Names}</h4>
+        <p>${d.dateOfBirth}</p>
+        <div class="portfolio-links" >
           <!-- <a href="assets/img/custom/poverty.jpeg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="fa-solid fa-eye"></i></a> -->
-          <a href="sponsor.html" title="More Details" style="font-size: 15px;"> Read more... <i class="bx bx-link"></i></a>
+          <a href="#" title="More Details" style="font-size: 15px;"> Read more... <i class="bx bx-link"></i></a>
         </div>
       </div></a>
     </div>
   </div>`;
+      }
     });
   };
   displayStudents();
 
+  Array.from(document.querySelectorAll("#student-view")).forEach(dv => {
+    // console.log("1111")
+    dv.addEventListener("click",function (element){
+      
+    const data = dv.dataset.userName;
+    console.log(data)
+    console.log("GGGGGGGGGGGGGGG",)
+    }
+     )
+  });
+  const displayTeamMates = async () => {
+    console.log(teamsData,"kkkkkkkkkkkk")
+    teamsData?.map((d) => {
+      allTeamMatesDiv.innerHTML += `
+      <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
+      <div class="member" data-aos="fade-up" data-aos-delay="100" style="display:flex">
+        <div class="" style="width: 45%;">
+          <img src=${d?.Picture} class="img-fluid" alt="" style="width: 100%;">
+          <div class="social">
+            <h1></h1>
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="member-info" style="width:50%" >
+          <h4>${d?.Names}</h4>
+          <span style="color:black">${d?.Title}</span>
+          <span>
+            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+            ${d?.Description}
+          <i class="bx bxs-quote-alt-right quote-icon-right"></i></span>
+        </div>
+      </div>
+    </div>
+      `;
+    });
+  };
+  const displayBoardMembers = async () => {
+    // console.log(teamsData,"kkkkkkkkkkkk")
+    boardsData?.map((d) => {
+      allBoardMembersDiv.innerHTML += `
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+      <div class="member" data-aos="fade-up" data-aos-delay="100" style="width:80%; backgroound:green">
+        <div class="member-img" style="width:100%;">
+          <img src=${d?.Picture} class="img-fluid" alt="" style="width:100%;">
+          <div class="social">
+            <h1></h1>
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="member-info" style="text-align:center">
+          <h4>${d?.Names}</h4>
+          <span style="color:black">${d?.Title}</span>
+        </div>
+      </div>
+    </div>
+      `;
+    });
+  };
+  const displaySingleStudent = () => {
+    singleStudentDiv.innerHTML = ` 
+    <div class="row gy-4">
 
-  const displayStory = async() => {
+<div class="col-lg-4">
+  <div class="portfolio-details-slider swiper">
+    <div class="swiper-wrapper align-items-center">
+
+      <div class="swiper-slide">
+        <img src=${currentViewStudentData?.Picture} alt="">
+      </div>
+
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+<div class="col-lg-4">
+  <div class="portfolio-info">
+    <h3>Child Information</h3>
+    <ul>
+      <li><strong>Names </strong>: Benjamin Iyamuremye</li>
+      <li><strong>Age</strong>: 12 years</li>
+      <li><strong>Class</strong>: Primary 2</li>
+    </ul>
+  </div>
+  <br>
+  <div class="portfolio-info">
+    <h3>About Child</h3>
+    <p>
+      itaque inventore commodi labore</p>
+    <p>
+      itaque inventore commodi labore </p>
+  </div>
+  <br>
+  <div class="portfolio-info">
+    <h3>Child Dreams</h3>
+    <ul>
+      <p>
+        itaque inventore commodi labore</p>
+       </ul>
+  </div>
+</div>
+<div class="col-lg-4 portfolio-info">
+
+  <h2>Are you interested?</h2>
+  <!-- <div class="portfolio-info"> -->
+    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+      <div class="row">
+        <div class=" form-group">
+          <input type="text" name="name" class="form-control" id="name" placeholder="Your Names" required>
+       <br>
+        </div>
+        <div class=" form-group">
+        
+        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+      <br>
+      </div>
+      <div class=" form-group">
+      
+      <input type="phone" class="form-control" name="phone" id="phone" placeholder="Your Phone (Country Code)" required>
+    <br>
+    </div>
+    <div class=" form-group">
+    
+    <input type="adress" class="form-control" name="adress" id="adress" placeholder="Your Adress" required>
+  <br>
+  </div>
+  <div class=" form-group">
+  
+  <input type="donation" class="form-control" name="donation" id="donation" placeholder="Your Monthly Donation ($)" required>
+<br>
+</div>
+      </div>
+     
+      <div ><button class="get-started-btn" type="submit">Apply</button></div>
+    </form>
+
+
+</div>
+
+</div>`;
+  };
+//  displaySingleStudent();
+
+  const displayStory = async () => {
     const response = await fetch(
       "https://shecancodeapplication-api.herokuapp.com/students",
       {
@@ -71,9 +237,9 @@ dataTest.map((d) => {
         },
       }
     );
-const addd =await response.json();
+    const addd = await response.json();
 
-  storiesData.map((d) => {
+    storiesData.map((d) => {
       allStoryDiv.innerHTML += ` <div class="swiper-slide">
   <div class="testimonial-wrap">
     <div class="testimonial-item">
@@ -90,44 +256,16 @@ const addd =await response.json();
 </div>`;
     });
 
- 
     // const ddata = require('../data/team.json')
-// console.log("@@2@@:",ddata)
-  }
-  displayStory();
-
-
-// const teamData =require("../data/team.json")
-  const displayTeamMates = async() => {
-    teamsData?.map((d) => {
-      allTeamMatesDiv.innerHTML += `
-      <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
-      <div class="member" data-aos="fade-up" data-aos-delay="100" style="display:flex">
-        <div class="" style="width: 45%; background:red">
-          <img src=${d?.Picture} class="img-fluid" alt="" style="width: 100%;">
-          <div class="social">
-            <h1></h1>
-            <a href=""><i class="bi bi-twitter"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-        <div class="member-info" style="width:50%">
-          <h4>${d?.Names}</h4>
-          <span style="color:black">${d?.Title}</span>
-          <span>
-            <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-            ${d?.Description}
-          <i class="bx bxs-quote-alt-right quote-icon-right"></i></span>
-        </div>
-      </div>
-    </div>
-      `;
-    });
+    // console.log("@@2@@:",ddata)
   };
+  displayStory();
+  displayBoardMembers();
 
   displayTeamMates();
+
+  // const teamData =require("../data/team.json")
+
   /**
    * Easy event listener function
    */
@@ -403,6 +541,11 @@ const addd =await response.json();
     },
   });
 
+  
+function myFfunction(){
+  console.log("helloooooo")
+}
+
   /**
    * Animation on scroll
    */
@@ -417,3 +560,4 @@ const addd =await response.json();
 })();
 
 // console.log(teamsData);
+
