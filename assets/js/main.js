@@ -26,12 +26,11 @@
    */
   //selector
 
-
   const viewData = (event) => {
     const data = event.target.dataset.userName;
-    console.log(data)
-    console.log("GGGGGGGGGGGGGGG",)
-  }
+    console.log(data);
+    console.log("GGGGGGGGGGGGGGG");
+  };
 
   let allStoryDiv = select("#story-div");
   let allStudents = select("#studentsDisplayContainer");
@@ -39,9 +38,7 @@
   let allBoardMembersDiv = select("#boardDisplayContainer");
   let singleStudentDiv = select("#singleStudentView");
 
-  
-
-  let currentViewStudentData=studentsData[0]
+  let currentViewStudentData = studentsData[0];
 
   const dataTest = [
     { name: "Eric Turatsinze", age: 14 },
@@ -49,20 +46,22 @@
     { name: "Fabrice Turatsinze", age: 14 },
     { name: "Eric John", age: 14 },
   ];
-const setStudent =(student)=>{
-  console.log("@@@@");
-  currentViewStudentData=student
-}
+  const setStudent = (student) => {
+    console.log("@@@@");
+    currentViewStudentData = student;
+  };
   const displayStudents = async () => {
     // console.log("@@@@@@@@@@",teamsData)
-    studentsData.map((d,i) => {
+    studentsData.map((d, i) => {
       if (d.isAvailable) {
         allStudents.innerHTML += `
   <div class="col-lg-3 col-md-6 portfolio-item filter-app">
     <div class="portfolio-wrap" style="height:400px" id="getOneStudent">
       <img src=${d.Picture} class="img-fluid" alt="">
      <a href="#" > 
-       <div class="portfolio-info" id="student-view" data-user-name=${JSON.stringify(d.Picture)} >
+       <div class="portfolio-info" id="student-view" data-user-name=${JSON.stringify(
+         d.Picture
+       )} >
         <h4  >${d.Names}</h4>
         <p>${d.dateOfBirth}</p>
         <div class="portfolio-links" >
@@ -77,18 +76,16 @@ const setStudent =(student)=>{
   };
   displayStudents();
 
-  Array.from(document.querySelectorAll("#student-view")).forEach(dv => {
+  Array.from(document.querySelectorAll("#student-view")).forEach((dv) => {
     // console.log("1111")
-    dv.addEventListener("click",function (element){
-      
-    const data = dv.dataset.userName;
-    console.log(data)
-    console.log("GGGGGGGGGGGGGGG",)
-    }
-     )
+    dv.addEventListener("click", function (element) {
+      const data = dv.dataset.userName;
+      console.log(data);
+      // console.log("GGGGGGGGGGGGGGG",)
+    });
   });
   const displayTeamMates = async () => {
-    console.log(teamsData,"kkkkkkkkkkkk")
+    // console.log(teamsData,"kkkkkkkkkkkk")
     teamsData?.map((d) => {
       allTeamMatesDiv.innerHTML += `
       <div class="col-lg-6 col-md-6 d-flex align-items-stretch">
@@ -132,7 +129,7 @@ const setStudent =(student)=>{
             <a href=""><i class="bi bi-linkedin"></i></a>
           </div>
         </div>
-        <div class="member-info" style="text-align:center">
+        <div class="member-info" style="text-align:center" >
           <h4>${d?.Names}</h4>
           <span style="color:black">${d?.Title}</span>
         </div>
@@ -224,7 +221,7 @@ const setStudent =(student)=>{
 
 </div>`;
   };
-//  displaySingleStudent();
+  //  displaySingleStudent();
 
   const displayStory = async () => {
     const response = await fetch(
@@ -243,14 +240,7 @@ const setStudent =(student)=>{
       allStoryDiv.innerHTML += ` <div class="swiper-slide">
   <div class="testimonial-wrap">
     <div class="testimonial-item">
-      <img src=${d.picture} class="testimonial-img" alt="">
-      <!-- <h3>Ishime Billiii </h3> -->
-      <!-- <h4>Designer</h4> -->
-      <p>
-        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-      ${d.story}
-        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-      </p>
+      <img src=${d.picture} class="testimonial-img" alt="" style="width:100%;">
     </div>
   </div>
 </div>`;
@@ -541,10 +531,9 @@ const setStudent =(student)=>{
     },
   });
 
-  
-function myFfunction(){
-  console.log("helloooooo")
-}
+  function myFfunction() {
+    console.log("helloooooo");
+  }
 
   /**
    * Animation on scroll
@@ -560,4 +549,3 @@ function myFfunction(){
 })();
 
 // console.log(teamsData);
-
